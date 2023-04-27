@@ -18,6 +18,7 @@
                 <th scope="col">Titolo</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Descrizione</th>
+                <th scope="col">Tecnologie</th>
                 <th scope="col">Tipo</th>
               </tr>
             </thead>
@@ -28,6 +29,13 @@
                     <td> <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a></td>
                     <td>{{ $project->client }}</td>
                     <td>{{ $project->description }}</td>
+                    <td>
+                    @forelse ($project->technologies as $technology)
+                    <span class="badge rounded-pill text-bg-light">{{ $technology->name }}</span>
+                    @empty
+                        
+                    @endforelse
+                    </td>
                     @if ($project->type)
                         <td>{{ $project->type->type }}</td>  
                     @else 

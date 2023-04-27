@@ -11,7 +11,12 @@
             @else
             <p>Nessun tipo</p>
             @endif
-            
+
+            @forelse($project->technologies as $technology)
+            <span class="badge rounded-pill text-bg-light">{{ $technology->name }}</span>
+            @empty
+                        
+            @endforelse
         </div>
     </div>
 @endsection
