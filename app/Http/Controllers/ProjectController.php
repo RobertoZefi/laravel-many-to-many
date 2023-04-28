@@ -113,6 +113,7 @@ class ProjectController extends Controller
             'client' => 'required|string|min:2',
             'description' => 'required',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id'
         ]);
 
         if ($data['title'] !== $project->title) {
@@ -120,6 +121,12 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        if(isset($data['technologies'])){
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
 
         /*$project->title = $data['title'];
         $project->client = $data['client'];
